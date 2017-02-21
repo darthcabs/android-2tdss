@@ -20,21 +20,18 @@
     <ImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:src="@drawable/garrafa"
         android:layout_toRightOf="@id/garrafa1"
         android:id="@+id/garrafa2"
         />
     <ImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:src="@drawable/garrafa"
         android:layout_toRightOf="@id/garrafa2"
         android:id="@+id/garrafa3"
         />
     <ImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:src="@drawable/garrafa"
         android:layout_toRightOf="@id/garrafa3"
         android:id="@+id/garrafa4"
         />
@@ -82,7 +79,13 @@
         android:background="#88333333"
         android:layout_below="@id/txtX"
         android:layout_centerInParent="true"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:textColor="#ffffff"
+        android:textSize="96sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:text="32"
+        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -90,5 +93,7 @@
         android:layout_marginTop="15dp"
         android:text="@string/btnOK_text"
         android:textSize="20sp"
-        android:id="@+id/btnOK"/>
+        android:id="@+id/btnOK"
+        android:onClick="btnOk_click"
+        />
 </RelativeLayout>

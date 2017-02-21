@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Tabuada</string>
     <string name="btnOK_text">Responder</string>
+    <string name="msgVencedor">Parabéns! Você venceu!</string>
 </resources>
