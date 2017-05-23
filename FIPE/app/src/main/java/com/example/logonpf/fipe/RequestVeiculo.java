@@ -12,9 +12,11 @@ import org.json.JSONObject;
 public class RequestVeiculo implements Response.Listener<JSONArray>{
 
     private ArrayAdapter<Veiculo> adpVeiculo;
+    private int idMarca;
 
-    public RequestVeiculo(ArrayAdapter<Veiculo> adpVeiculo) {
+    public RequestVeiculo(int idMarca, ArrayAdapter<Veiculo> adpVeiculo) {
         this.adpVeiculo = adpVeiculo;
+        this.idMarca = idMarca;
     }
 
     @Override
@@ -27,22 +29,11 @@ public class RequestVeiculo implements Response.Listener<JSONArray>{
             try {
                 JSONObject obj = response.getJSONObject(i);
                 Veiculo m = new Veiculo(obj.getInt("id"), obj.getString("fipe_name"));
-
-                //TODO fazer buscar ano, key, etc,
-                // para listar os anos com o respectivo preço
-                getAno();
-
+                m.setMarca(idMarca);
                 adpVeiculo.add(m);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-
     }
-
-    public void getAno(){
-        //TODO
-    }
-
-
 }

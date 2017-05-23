@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -21,14 +22,23 @@ public class MainActivity extends AppCompatActivity
     private Spinner spMarca;
     private List<Marca> marcas;
     private ArrayAdapter<Marca> adpMarca;
+
     private Spinner spVeiculo;
     private List<Veiculo> veiculos;
     private ArrayAdapter<Veiculo> adpVeiculo;
+
+    private Spinner spAno;
+    private List<Ano> anos;
+    private ArrayAdapter<Ano> adpAno;
+
+    private TextView txtPreco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        txtPreco = (TextView) findViewById(R.id.txtPreco);
 
         spMarca = (Spinner) findViewById(R.id.spMarca);
         spMarca.setOnItemSelectedListener(this);
@@ -44,15 +54,35 @@ public class MainActivity extends AppCompatActivity
         adpVeiculo = new ArrayAdapter<Veiculo>(this,
                 R.layout.spinner_item,veiculos);
         spVeiculo.setAdapter(adpVeiculo);
-
         adpVeiculo.add(new Veiculo(-1, "Escolha o Veículo"));
 
-        carregarMarcas();
+        spAno = (Spinner) findViewById(R.id.spAno);
+        spAno.setOnItemSelectedListener(this);
+        anos = new ArrayList<Ano>();
+        adpAno = new ArrayAdapter<Ano>(this,
+                R.layout.spinner_item,anos);
+        spAno.setAdapter(adpAno);
+        adpAno.add(new Ano(-1, "Escolha o Ano"));
 
+        carregarMarcas();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Object o = parent.getItemAtPosition(position);
+        if (o instanceof Marca){
+            adpVeiculo.clear();
+            carregarVeiculos(((Marca) o).getId());
+        } else if (o instanceof Veiculo){
+            adpAno.clear();
+            carregarAnos(((Veiculo) o).getMarca(), ((Veiculo) o).getId());
+        } else if (o instanceof Ano){
+            txtPreco.setText("");
+            carregarPreco(((Ano) o).getIdMarca(), ((Ano) o).getIdVeiculo(), ((Ano) o).getCodFipe());
+        }
     }
 
     private void carregarMarcas() {
-
         String url = "http://fipeapi.appspot.com/api/1/carros/marcas.json";
         JsonArrayRequest req = new JsonArrayRequest(url,
                 new RequestMarca(adpMarca),
@@ -64,23 +94,32 @@ public class MainActivity extends AppCompatActivity
     private void carregarVeiculos(int idMarca) {
         String url = "http://fipeapi.appspot.com/api/1/carros/veiculos/" + idMarca + ".json";
         JsonArrayRequest req = new JsonArrayRequest(url,
-                new RequestVeiculo(adpVeiculo),
+                new RequestVeiculo(idMarca, adpVeiculo),
                 new RequestError());
         RequestQueue q = Volley.newRequestQueue(this);
         q.add(req);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    private void carregarAnos(int idMarca, int idVeiculo) {
+        String url = "http://fipeapi.appspot.com/api/1/carros/veiculo/" + idMarca + "/" + idVeiculo + ".json";
+        JsonArrayRequest req = new JsonArrayRequest(url,
+                new RequestAno(idMarca, idVeiculo, adpAno),
+                new RequestError());
+        RequestQueue q = Volley.newRequestQueue(this);
+        q.add(req);
+    }
 
-        Object o = parent.getItemAtPosition(position);
-        if (o instanceof Marca){
-            adpVeiculo.clear();
-            carregarVeiculos(((Marca) o).getId());
-        } else if (o instanceof Veiculo){
+    private void carregarPreco(int idMarca, int idVeiculo, String codFipe) {
+        String url = "http://fipeapi.appspot.com/api/1/carros/veiculo/" + idMarca + "/" + idVeiculo + "/" + codFipe + ".json";
 
-        }
-
+        // TODO
+        /*
+            JsonArrayRequest req = new JsonArrayRequest(url,
+                    new RequestPreco(idMarca, idVeiculo, adpAno),
+                    new RequestError());
+            RequestQueue q = Volley.newRequestQueue(this);
+            q.add(req);
+         */
 
     }
 

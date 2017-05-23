@@ -3,22 +3,19 @@ package com.example.logonpf.fipe;
 public class Veiculo {
 
     private int id;
+    private int marca;
     private String key;
     private String nome;
-    private String ano;
-    private String preco;
 
     public Veiculo(int id, String nome) {
         this.id = id;
         this.nome = nome;
     }
 
-    public Veiculo(int id, String key, String nome, String ano, String preco) {
+    public Veiculo(int id, String key, String nome) {
         this.id = id;
         this.key = key;
         this.nome = nome;
-        this.ano = ano;
-        this.preco = preco;
     }
 
     @Override
@@ -50,19 +47,7 @@ public class Veiculo {
         this.key = key;
     }
 
-    public String getAno() {
-        return ano;
-    }
+    public int getMarca() {return marca;}
 
-    public void setAno(String ano) {
-        this.ano = ano;
-    }
-
-    public String getPreco() {
-        return preco;
-    }
-
-    public void setPreco(String preco) {
-        this.preco = preco;
-    }
+    public void setMarca(int marca) {this.marca = marca;}
 }
