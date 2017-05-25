@@ -10,7 +10,8 @@ public class RequestError implements Response.ErrorListener{
     @Override
     public void onErrorResponse(VolleyError error) {
 
-        Log.e("FIPE", "Erro: " + error.getMessage() + "\n" + error.getStackTrace().toString());
+        Log.e("FIPE", "Erro: " + error.getMessage());
+        error.printStackTrace();
 
     }
 }

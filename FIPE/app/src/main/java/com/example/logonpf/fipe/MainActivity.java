@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity
     private void carregarPreco(int idMarca, int idVeiculo, String codFipe) {
         String url = "http://fipeapi.appspot.com/api/1/carros/veiculo/" + idMarca + "/" + idVeiculo + "/" + codFipe + ".json";
 
-        JsonArrayRequest req = new JsonArrayRequest(url, new RequestPreco(this), new RequestError());
+        JsonObjectRequest req = new JsonObjectRequest(url, null, new RequestPreco(this), new RequestError());
         RequestQueue q = Volley.newRequestQueue(this);
         q.add(req);
     }

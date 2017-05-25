@@ -1,6 +1,7 @@
 package com.example.logonpf.fipe;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -13,7 +14,7 @@ import static com.example.logonpf.fipe.R.id.txtPreco;
 /**
  * Created by rm76860 on 25/05/2017.
  */
-public class RequestPreco implements Response.Listener<JSONArray> {
+public class RequestPreco implements Response.Listener<JSONObject> {
     private Context context;
 
     public RequestPreco(Context mainActContext) {
@@ -21,10 +22,11 @@ public class RequestPreco implements Response.Listener<JSONArray> {
     }
 
     @Override
-    public void onResponse(JSONArray response) {
+    public void onResponse(JSONObject response) {
+        Log.i("ReqPreco.onResponse", "Antes do try...catch");
         try {
-            JSONObject obj = response.getJSONObject(0);
-            String preco = obj.getString("preco");
+            Log.i("ReqPreco.onResponse", "Dentro do try...catch");
+            String preco = response.getString("preco");
             TextView txtPreco = (TextView) ((MainActivity)context).findViewById(R.id.txtPreco);
             txtPreco.setText(preco);
         } catch (JSONException e) {

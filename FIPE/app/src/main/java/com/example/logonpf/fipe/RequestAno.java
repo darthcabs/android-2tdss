@@ -22,14 +22,8 @@ public class RequestAno implements Response.Listener<JSONArray> {
 
     @Override
     public void onResponse(JSONArray response) {
-        for (int i = 1; i < response.length(); i++){
+        for (int i = 0; i < response.length(); i++){
             try {
-                //"fipe_codigo": "32000-1",
-                //       "name": "Zero KM Gasolina",
-                //        "key": "32000-1",
-                //    "veiculo": "Palio 1.0 ECONOMY Fire Flex 8V 4p",
-                //         "id": "32000-1"
-
                 JSONObject obj = response.getJSONObject(i);
                 Ano a = new Ano();
                 String fc = obj.getString("fipe_codigo");
