@@ -31,6 +31,6 @@
         android:id="@+id/txtPreco"
         android:layout_below="@+id/spAno"
         android:textSize="28sp"
-        android:textColor="#00FF00"
+        android:textColor="#43A047"
         android:padding="3dp" />
 </RelativeLayout>

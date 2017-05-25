@@ -70,13 +70,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Object o = parent.getItemAtPosition(position);
-        if (o instanceof Marca){
+        if (parent == spMarca){
             adpVeiculo.clear();
             carregarVeiculos(((Marca) o).getId());
-        } else if (o instanceof Veiculo){
+        } else if (parent == spVeiculo){
             adpAno.clear();
             carregarAnos(((Veiculo) o).getMarca(), ((Veiculo) o).getId());
-        } else if (o instanceof Ano){
+        } else if (parent == spAno){
             txtPreco.setText("");
             carregarPreco(((Ano) o).getIdMarca(), ((Ano) o).getIdVeiculo(), ((Ano) o).getCodFipe());
         }
@@ -112,15 +112,11 @@ public class MainActivity extends AppCompatActivity
     private void carregarPreco(int idMarca, int idVeiculo, String codFipe) {
         String url = "http://fipeapi.appspot.com/api/1/carros/veiculo/" + idMarca + "/" + idVeiculo + "/" + codFipe + ".json";
 
-        // TODO
-        /*
-            JsonArrayRequest req = new JsonArrayRequest(url,
-                    new RequestPreco(idMarca, idVeiculo, adpAno),
-                    new RequestError());
-            RequestQueue q = Volley.newRequestQueue(this);
-            q.add(req);
-         */
-
+        JsonArrayRequest req = new JsonArrayRequest(url,
+                new RequestPreco(txtPreco),
+                new RequestError());
+        RequestQueue q = Volley.newRequestQueue(this);
+        q.add(req);
     }
 
     @Override

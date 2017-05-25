@@ -36,6 +36,8 @@ public class RequestAno implements Response.Listener<JSONArray> {
                 a.setCodFipe(fc);
                 String[] id = fc.split("-");
                 a.setId(Integer.parseInt(id[0]));
+                a.setIdMarca(idMarca);
+                a.setIdVeiculo(idVeiculo);
 
                 adpAno.add(a);
             } catch (JSONException e) {
