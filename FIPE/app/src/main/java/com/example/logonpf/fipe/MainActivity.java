@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity
             adpAno.clear();
             carregarAnos(((Veiculo) o).getMarca(), ((Veiculo) o).getId());
         } else if (parent == spAno){
-            txtPreco.setText("");
+            //txtPreco.setText("Preço:");
             carregarPreco(((Ano) o).getIdMarca(), ((Ano) o).getIdVeiculo(), ((Ano) o).getCodFipe());
         }
     }
@@ -112,9 +112,7 @@ public class MainActivity extends AppCompatActivity
     private void carregarPreco(int idMarca, int idVeiculo, String codFipe) {
         String url = "http://fipeapi.appspot.com/api/1/carros/veiculo/" + idMarca + "/" + idVeiculo + "/" + codFipe + ".json";
 
-        JsonArrayRequest req = new JsonArrayRequest(url,
-                new RequestPreco(txtPreco),
-                new RequestError());
+        JsonArrayRequest req = new JsonArrayRequest(url, new RequestPreco(this), new RequestError());
         RequestQueue q = Volley.newRequestQueue(this);
         q.add(req);
     }

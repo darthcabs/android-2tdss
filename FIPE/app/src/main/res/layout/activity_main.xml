@@ -22,15 +22,17 @@
     <Spinner android:id="@+id/spAno"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="40dp"
         android:layout_below="@+id/spVeiculo"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:id="@+id/txtPreco"
-        android:layout_below="@+id/spAno"
         android:textSize="28sp"
         android:textColor="#43A047"
-        android:padding="3dp" />
+        android:padding="3dp"
+        android:text="Preço:"
+        android:layout_below="@+id/spAno"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="70dp" />
 </RelativeLayout>
